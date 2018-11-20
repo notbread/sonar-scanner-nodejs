@@ -3,7 +3,7 @@ services:
   - docker
 env:
   global:
-    - secure: "uO2bWaRVozxs+/9YsCyTaFfvE44XuDEAbHc0bGoz18LtFpwsHlsVdZEE/xnj6MSJXcCpcJ4tovMkPzsN4M913jgV6VaQOROqor3Z4/ur7YheNzk603UmLRAPFHWEFADssLdQxPeVnzjKYzOufbilDf2tsh1MK9Z0F2vlPVoX9Ng/gsegpUvEkZtVCaznr11wpSebd+Eg0mrcBzIJg9Acvy+tWKDwcP+OqGW5fxWEdC1pTSsbv7OOuDXxW+kCwo+e/opMu0vddZolsVKmp6u/OxWK06q0US+Vfs0Az77s8E0gVxmTgp0z5l5wV/c/6BLf3xL34jfkTLzTzSuVrgWdqzEbjhEJZAvdSGhaKuNCcjO1RhzdzYvUi+ubwmFV/6RRmHvLKq8AvRA9tbxxObrK4P//b7jXDPxYJSPpIzPWE4xSrxhb/FfD+hn80A087l7dyBAZXZ6hDcoh0fVWUw5v4oKfbA2I9um2kTvG61vqNEnKi9WBNxufJlilwanuZSLEpU/Uwyauf+mA/WG1/ecj1X7e0xOmxDg+bQBsS5XRA7nPev6GedYBA/Gnktr74g+PIzBFB5ea2sWX2QMI6M1DmYNYpv+0EF4jVL0sAxhdOWYmcvdHg5YMJos3e9v83cwLlYLDiabbCZM3oTe6SlZYM/D/pg6dJ3xU1XlMHWwIYy8="
+    - secure: "y7udmWlcst0aYFfn6jus3ZcefLCXii/JnZZ2Zl5nluRGQgbUtb8BQkXA4168rMjr5PLuD2OGkihoozWYYACnv0AhYdDDqRvYD0LE3a0gAhiFquqw9yt35RldYt6Oq0FI9Vn8Z2dfVhIb1M/it+w3TN65mSreabEKa7TeC1582gO9/ReMQ7IZhsksB5sDm5X+If5h6fSgWTqn7a9Adt7ZPkcHo2MACHhQY5ZeGGL4PZ2Gw87pi1rsRoC6ykxj48/Yf2bP5t+O9Wu6uQEuCK2liljjCqOPvt0aa0Ffm9f4gINx1EJ18P0zsSfyrzxkcVq4iHmAlwqGuXCBwJj0oly6Oh40Rgeo6tFpNs8vezZMOZomA5smEIexHsejnfA1P3PAfy/GrQLZJVzBt7E0KgxHNPbgsjsPgz9HIbu5IeiW3MLOSvxK08mzGGBavUcU7GFENxJyJQemnN01NAxXxY8TgwCbBYm08pMvz0pqKb/f7X3ltLWbG4jxloIC5DX5LgBc93+REMemwsLzA7Z+OAUvrgVrmWOFgQdrIfrStbaB7FmAFAGxc7qMhweWsCE4sp7DZnAh+9WCRbPvomSLRdSgVYQax4s40AAzydy8e8jdheZqs64Je6NAGhwIChaPtkvbu4rXVEOQtvFRrEI78raET8skKTbU5yaOZUjeZSGfpIc="
     - REGISTRY_USER=traviscisakson
 
 
@@ -16,7 +16,7 @@ after_script:
   - docker images
 
 before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker login -u "$REGISTRY_USER" --password-stdin -p "$REGISTRY_PASS"
 deploy:
   provider: script
   script: docker push sakson/sonar-scanner-nodejs
