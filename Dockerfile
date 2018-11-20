@@ -12,7 +12,8 @@ RUN apt-get update \
     gnupg \
     unzip \
     curl \
-    jq
+    jq \
+    libpq-dev
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get install -y nodejs \
     && curl -o sonar-scanner.zip -fSL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER_VER}.zip" \
