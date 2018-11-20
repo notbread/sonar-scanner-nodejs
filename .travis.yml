@@ -14,7 +14,7 @@ after_script:
   - docker images
 
 before_deploy:
-  - docker login -u "traviscisakson" --password-stdin $REGISTRY_PASS
+  - docker login -u "traviscisakson" -p $REGISTRY_PASS
 deploy:
   provider: script
   script: docker push sakson/sonar-scanner-nodejs
