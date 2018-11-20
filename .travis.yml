@@ -1,0 +1,24 @@
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - secure: "uO2bWaRVozxs+/9YsCyTaFfvE44XuDEAbHc0bGoz18LtFpwsHlsVdZEE/xnj6MSJXcCpcJ4tovMkPzsN4M913jgV6VaQOROqor3Z4/ur7YheNzk603UmLRAPFHWEFADssLdQxPeVnzjKYzOufbilDf2tsh1MK9Z0F2vlPVoX9Ng/gsegpUvEkZtVCaznr11wpSebd+Eg0mrcBzIJg9Acvy+tWKDwcP+OqGW5fxWEdC1pTSsbv7OOuDXxW+kCwo+e/opMu0vddZolsVKmp6u/OxWK06q0US+Vfs0Az77s8E0gVxmTgp0z5l5wV/c/6BLf3xL34jfkTLzTzSuVrgWdqzEbjhEJZAvdSGhaKuNCcjO1RhzdzYvUi+ubwmFV/6RRmHvLKq8AvRA9tbxxObrK4P//b7jXDPxYJSPpIzPWE4xSrxhb/FfD+hn80A087l7dyBAZXZ6hDcoh0fVWUw5v4oKfbA2I9um2kTvG61vqNEnKi9WBNxufJlilwanuZSLEpU/Uwyauf+mA/WG1/ecj1X7e0xOmxDg+bQBsS5XRA7nPev6GedYBA/Gnktr74g+PIzBFB5ea2sWX2QMI6M1DmYNYpv+0EF4jVL0sAxhdOWYmcvdHg5YMJos3e9v83cwLlYLDiabbCZM3oTe6SlZYM/D/pg6dJ3xU1XlMHWwIYy8="
+    - REGISTRY_USER=traviscisakson
+
+
+before_script:
+  - docker pull sakson/sonar-scanner-nodejs || true
+script:
+  - docker build --pull --cache-from sakson/sonar-scanner-nodejs --tag sakson/sonar-scanner-nodejs .
+
+after_script:
+  - docker images
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+deploy:
+  provider: script
+  script: docker push sakson/sonar-scanner-nodejs
+  on:
+    branch: master
