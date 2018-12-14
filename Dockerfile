@@ -30,6 +30,6 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && update-ca-certificates -f \
     && /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 CMD ["sonar-scanner"]
